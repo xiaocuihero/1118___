@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Very Basic 3D Viewer</title>
+	<style type="text/css">
+		input[type="number"] {
+			width: 100px
+		}
+		input[type="text"]{
+			width: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<div id="MyViewerDiv" style="width: 1600px; position: relative; height: 1000px;float: left;"></div>
+		<div style="background-color: gray; width: 250px;position: relative; height: 1000px;float: right; ">
+			
+		</div>
+	</div>
+
+	<!-- <input type="button" style="position: absolute; top: 0px; left:0px; z-index: 100;" onclick="LoadExtensionNeed()" value="extension"> -->
+
+<!-- 	<input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="step1()" value="step1">
+	<input type="button" style="position:absolute;top:0px;left:200px;z-index:100" onclick="step3()" value="step2">
+	<input type="button" style="position:absolute;top:0px;left:250px;z-index:100" onclick="stepAll()" value="stepAll"> -->
+
+	<!-- <input type="button" style="position:absolute;top:0px;left:50px;z-index:100" onclick="loads3()"> -->
+	<!-- <input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="test()"> -->
+
+	<!-- The Viewer JS -->
+	<script src="jquery-2.1.1.min.js"></script>
+	<script src="three.min.js"></script>
+	<!--  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v2.10"></script> -->
+	<link rel="stylesheet" href="style.min.css" type="text/css">
+	<script src="viewer3D.min.js"></script>	
+
+ 	
+	 <script src="Autodesk.ADN.Viewing.Extension.Move.js"></script>-->
+	 <script src="Autodesk.ADN.Viewing.Extension.TransformTool.js"></script>
+	 <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script>
+	 <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>
+	 
+
+	 <script type="text/javascript" src="scripts/aaa.js"></script>
+
+	 <style type="text/css">
+
+	 </style>
+
+	 <!-- Developer JS -->
+	 <script>
+	 	var myViewerDiv = document.getElementById('MyViewerDiv');
+	 	var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
+	 	var options = {
+	 		'env' : 'Local',
+	 		'document' : './svf/building.max/building.svf'
+	 	}; 	
+
+	 	// aaaa();
+	 	Autodesk.Viewing.Initializer(options, function() {
+	 		viewer.initialize ();	
+	 		viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {     
+	 			viewer.fitToView (false) ;	 		               
+	 			// viewer.loadExtension('Autodesk.ADN.Viewing.Extension.TransformTool');
+	 			viewer.loadExtension('Autodesk.ADN.Viewing.Extension.ContextMenu');
+	 			
+	 			deleteToolbar();
+	 			// viewer.setViewCube("[],[top],[]");
+	 		}) ;	
+	 	});	
+
+
+ 	
+	</script>
+
+	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
+	 <script type="text/javascript" src="scripts/testData.js"></script>
+	 <script type="text/javascript" src="scripts/modelLoader.js"></script>
+	 <script type="text/javascript" src="scripts/toolbarControler.js"></script>	 
+
+
+<!-- 	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
+	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
+	 <script type="text/javascript" src="scripts/showHide.js"></script> -->
+
+	 <script type="text/javascript">
+	 	CZloadModel(floorData[0].urn);
+	 	CZloadModel(roomData[0].urn, roomTrans[0]);
+	 	CZloadModel(roomData[0].urn, roomTrans[1]);
+	 	CZloadModel(towerData[1].urn, towerTrans[0]);
+	 </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Very Basic 3D Viewer</title>
+	<style type="text/css">
+		input[type="number"] {
+			width: 100px
+		}
+		input[type="text"]{
+			width: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<div id="MyViewerDiv" style="width: 1600px; position: relative; height: 1000px;float: left;"></div>
+		<div style="background-color: gray; width: 250px;position: relative; height: 1000px;float: right; ">
+			<div id="fragId">321</div>
+			<div id="dbId">123</div>
+			<div id="modelId">321</div>
+			<div id="modelsvf">model:???</div>
+			<br/>
+			<div>
+				modelSelect
+				<br/>
+				<select id="modelSelect"></select>
+				<br/>
+				<select id="ModelSelectNext"></select>			
+			<br/>
+			</div>
+			<div>
+				referenceModelSelect
+				<br/>
+				<select id="rmodelSelect"></select>
+				<br/>
+				<select id="rModelSelectNext"></select>			
+			<br/>
+			<br/>
+			<br/>			
+			<div>
+				<button onclick="insertModel()">加入模型</button>&nbsp;<button onclick="getResult()">导出数据</button>;
+			</div>
+			<div id="deleteButtons">
+				<br/>
+			</div>
+			<br/>
+			<div>
+				<input type="number" id="tx" placeholder="translate_x" disabled="true">&nbsp;<input type="number" id="rx" placeholder="rotate_x">
+			</div>
+			<div>
+				<input type="number" id="ty" placeholder="translate_y" disabled="true">&nbsp;<input type="number" id="ry" placeholder="rotate_y">
+			</div>
+			<div>
+				<input type="number" id="tz" placeholder="translate_z" disabled="true">&nbsp;<input type="number" id="rz" placeholder="rotate_z">
+			</div>
+							
+			<div>
+<!-- 				<input type="Button" onclick="getTransformData()" value="输出">
+				<br/>
+				<br/>
+				<input type="Button" onclick="printTestModel()" value="测试">	&nbsp;			
+				<input type="Button" onclick="clearTestModel()" value="删除测试">			 -->			
+<!-- 				<br/>
+				transform data addition
+				<input type="text" id="key1" placeholder="key">&nbsp;
+				<input type="text" id="value1" placeholder="value">&nbsp;
+				<br/>
+				<input type="text" id="key2" placeholder="key">&nbsp;
+				<input type="text" id="value2" placeholder="value">&nbsp;
+				<br/>
+				<input type="text" id="key3" placeholder="key">&nbsp;
+				<input type="text" id="value3" placeholder="value">&nbsp; -->
+				<br/>	
+				<br/>
+				<br/>
+				data format addition
+				<input type="text" id="key01" placeholder="key" value="super_Id" disabled="true">&nbsp;				
+				<input type="text" id="value01" placeholder="value">&nbsp;
+				<br/>
+				<input type="text" id="key02" placeholder="key">&nbsp;
+				<input type="text" id="value02" placeholder="value">&nbsp;
+				<br/>
+				<input type="text" id="key03" placeholder="key">&nbsp;
+				<input type="text" id="value03" placeholder="value">&nbsp;
+			</div>
+			<br/>
+			<br/>
+			<div>
+				<textarea rows="15" cols="30" id="rs">
+				</textarea>
+			</div>
+		</div>
+	</div>
+
+	<!-- <input type="button" style="position: absolute; top: 0px; left:0px; z-index: 100;" onclick="LoadExtensionNeed()" value="extension"> -->
+
+<!-- 	<input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="step1()" value="step1">
+	<input type="button" style="position:absolute;top:0px;left:200px;z-index:100" onclick="step3()" value="step2">
+	<input type="button" style="position:absolute;top:0px;left:250px;z-index:100" onclick="stepAll()" value="stepAll"> -->
+
+	<!-- <input type="button" style="position:absolute;top:0px;left:50px;z-index:100" onclick="loads3()"> -->
+	<!-- <input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="test()"> -->
+
+	<!-- The Viewer JS -->
+	<script src="jquery-2.1.1.min.js"></script>
+	<script src="three.min.js"></script>
+	<!--  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v2.10"></script> -->
+	<link rel="stylesheet" href="style.min.css" type="text/css">
+	<script src="viewer3D.min.js"></script>	
+
+ 	
+	 <script src="Autodesk.ADN.Viewing.Extension.Move.js"></script>-->
+	 <script src="Autodesk.ADN.Viewing.Extension.TransformTool.js"></script>
+	 <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script>
+	 <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>
+
+	 <script type="text/javascript" src="scripts/aaa.js"></script>
+
+	 <style type="text/css">
+
+	 </style>
+
+	 <!-- Developer JS -->
+	 <script>
+	 	var myViewerDiv = document.getElementById('MyViewerDiv');
+	 	var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
+	 	var options = {
+	 		'env' : 'Local',
+	 		'document' : './svf/building.max/building.svf'
+	 	}; 	
+
+	 	// aaaa();
+	 	Autodesk.Viewing.Initializer(options, function() {
+	 		viewer.initialize ();	
+	 		viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {                    
+	 			// viewer.fitToView (false) ;
+	 			viewer.loadExtension('Autodesk.ADN.Viewing.Extension.TransformTool');
+	 			// viewer.setViewCube("[],[top],[]");
+	 			// viewer.autocam.animateTransition(new THREE.Vector3(0,0,10));
+	 			// viewer.autocam.camera.position = new THREE.Vector3(0,0,1000);
+	 			// var center = new THREE.Vector3(0,0,0);
+	 			// viewer.autocam.camera.lookAt(center);	
+
+
+	 		}) ;	
+	 	});	
+
+
+ 	
+	</script>
+
+	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
+	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
+	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
+	 <script type="text/javascript" src="scripts/showHide.js"></script>
+
+	 <script type="text/javascript">
+
+	 	adjustDataInit(wirelessData[0].urn);
+	 	selectInit();
+	 	// adjustInit();
+	 	function getTransformData(){
+	 		// $("#rs").val(translateSubmit());
+	 		$("#rs").val(dataFormatCabinet());
+	 	}
+
+	 	function printTestModel(){
+	 		translateTest();
+	 	}
+
+	 	function clearTestModel(){
+	 		translateClear();
+	 	}
+
+		function selectInit(){
+			// for(var i = 0; i < allData.length; i++){
+			// 	var html = "<option value='Value1'>Text</option>".replace("Value1",i).replace("Text",);
+			// }
+			$("#modelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+			for(var key in allData){				
+				$("#modelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
+			}
+			$("#modelSelect").change(function(){
+				console.log(1);
+				var keyt = $(this).children('option:selected').val();
+				$("#ModelSelectNext").empty();
+				$("#ModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+				for(var item in allData[keyt.toString()]){					
+					var obj = allData[keyt.toString()][item];
+					var name = obj.name;
+					$("#ModelSelectNext").append("<option value='"+ item +"'>"+ name +"</option>");					
+				}
+				$("#ModelSelectNext").off( "change" );
+				$("#ModelSelectNext").change(function(){
+					var keytt = $(this).children('option:selected').val();
+					var obj = allData[keyt.toString()][keytt];
+					CZModelReload(obj.urn);
+				});
+			});
+
+			$("#rmodelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+			for(var key in allData){				
+				$("#rmodelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
+			}
+			$("#rmodelSelect").change(function(){
+				// console.log(1);
+				var keyt = $(this).children('option:selected').val();
+				$("#rModelSelectNext").empty();
+				$("#rModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+				for(var item in allData[keyt.toString()]){
+					var obj = allData[keyt.toString()][item];
+					var name = obj.name;
+					$("#rModelSelectNext").append("<option value='"+ item +"'>"+ name +"</option>");					
+				}
+				$("#rModelSelectNext").off( "change" );	
+				$("#rModelSelectNext").change(function(){
+					var keytt = $(this).children('option:selected').val();
+					var obj = allData[keyt.toString()][keytt];
+					CZReferenceModelReload(obj.urn);
+				});			
+			});
+		}
+
+		function buttonBuild(){			
+			console.log("rb");
+			console.log(adjustTestModels);
+			var $container = $("#deleteButtons");
+			$container.empty();
+			for(var mdi in adjustTestModels){
+				var md = adjustTestModels[mdi];
+				var mid = md.id;
+				var html = "<button onclick='deleteModel(" + mid + ")' style='background-color: red'>删除模型 model.Id=" + mid + "</button><br/>";
+				$container.append(html);
+			}
+		}
+
+		function insertModel(){
+			var first = $("#modelSelect").children('option:selected').val();
+			var second = $("#ModelSelectNext").children('option:selected').val();
+			addNewModel(first, second, buttonBuild);
+		}
+
+		function deleteModel(mid, callback){
+			deleteAdjustTestModelsByModelId(mid, buttonBuild);
+		}
+
+		function getResult(){
+			var sid = parseInt($("#value01").val());
+			$("#rs").val(arrayDataPrase(sid));
+		}
+
+
+
+	 </script>
+
+
+</body>
+
+</html>
