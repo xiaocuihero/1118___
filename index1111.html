@@ -217,6 +217,32 @@
 			});
 		}
 
+		// typeDataInsert();
+		function typeDataInsert(){
+
+			for(var key in insertTypeDatas){
+				var data = insertTypeDatas[key.toString()];
+				Insert(key, data);
+			}
+
+			function Insert(tname, tdata){
+				var url = urlPHPRoot + 'php/typeDataInsert.php';
+				var data = {"tname":tname, "tdata":JSON.stringify(tdata)};
+				$.ajax({
+					url:"./php/typeDataInsert.php",
+					type:"POST",
+					data:data,
+					dataType:"text",
+					success:function(rdata){
+						console.log(rdata);
+					},
+					error:function(edata){
+						console.log(edata);
+					}
+				});
+			}
+		}
+
 		// var test = {};
 		// var test1 = {};
 		// test.a = 1;
