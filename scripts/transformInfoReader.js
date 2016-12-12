@@ -177,7 +177,7 @@ function addNewModel(firstClass, secondClass, callback1){
 
 	var dataT = allData[firstClass.toString()][secondClass];
 	var data = {};
-	data = $.extend(data, allData[firstClass.toString()][secondClass]);
+	data.selfId = dataT.id;
 	data.tx = lastPosition.x;
 	data.ty = lastPosition.y;
 	data.tz = lastPosition.z;
@@ -203,11 +203,13 @@ function arrayDataPrase(super_id){
 	var arr = [];
 	for (var i = 0; i < adjustTestDatas.length; i++) {
 		var data = adjustTestDatas[i];
-		data.ID = i + 1;
+		// data.selfId = data.id;
+		data.pos_index = i + 1;
 		if (super_id != null){
-			data.superId = super_id;
+			data.superId = super_id || 1;
 		}
 		arr.push(data);
 	}
+	// console.log(arr);
 	return JSON.stringify(arr);
 }

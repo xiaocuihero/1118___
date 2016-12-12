@@ -146,6 +146,7 @@
 	</script>
 
 	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
+	 <script type="text/javascript" src="scripts/testData.js"></script>	 	 
 	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
 	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
 	 <script type="text/javascript" src="scripts/showHide.js"></script>
@@ -157,7 +158,20 @@
 	 	// adjustInit();
 	 	function getTransformData(){
 	 		// $("#rs").val(translateSubmit());
-	 		$("#rs").val(dataFormatWirless());
+	 		$("#rs").val(testData(FrameTrans));
+	 	}
+
+	 	function testData(datas){
+	 		var datasT = [];
+	 		for (var i = 0; i < datas.length; i++){
+	 			var data = datas[i];
+	 			data.id = data.id+1;
+	 			data.superId = data.superId+1;
+	 			data.selfId = data.selfId+1;
+	 			data.pos_index = data.pos_index+1;
+	 			datasT.push(data);
+	 		}
+	 		return JSON.stringify(datasT)	
 	 	}
 
 	 	function printTestModel(){
@@ -217,16 +231,34 @@
 			});
 		}
 
+		// selectSence1Test();
+		function selectSence1Test(){
+			$.ajax({
+				url:"./php/select.php",
+				type:"POST",
+				data:{
+					type:"room"
+				},
+				dataType:"JSON",
+				success:function(data){
+					console.log(data);
+				},
+				error:function(e){
+					console.log(e);
+				}
+			})
+		}
+
 		// typeDataInsert();
+
 		function typeDataInsert(){
 
 			for(var key in insertTypeDatas){
 				var data = insertTypeDatas[key.toString()];
 				Insert(key, data);
 			}
-
+			// Insert("room_type", roomData);
 			function Insert(tname, tdata){
-				var url = urlPHPRoot + 'php/typeDataInsert.php';
 				var data = {"tname":tname, "tdata":JSON.stringify(tdata)};
 				$.ajax({
 					url:"./php/typeDataInsert.php",
@@ -242,6 +274,30 @@
 				});
 			}
 		}
+
+
+		// InsertTransform("frame",FrameTrans);
+		// InsertTransform("slot",SlotTrans);
+		// InsertTransform("room",roomTrans);
+
+		function InsertTransform(type, tdata){
+			var url = urlPHPRoot + 'php/transformDataInsert.php';
+			var data = {"type":type, "tdata":JSON.stringify(tdata)};
+			$.ajax({
+				url:"./php/transformDataInsert.php",
+				type:"POST",
+				data:data,
+				dataType:"text",
+				success:function(rdata){
+					console.log(rdata);
+				},
+				error:function(edata){
+					console.log(edata);
+				}
+			});
+		}
+		
+
 
 		// var test = {};
 		// var test1 = {};

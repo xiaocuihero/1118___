@@ -87,10 +87,18 @@
 	 <script type="text/javascript" src="scripts/showHide.js"></script> -->
 
 	 <script type="text/javascript">
-	 	CZloadModel(floorData[0].urn);
-	 	CZloadModel(roomData[0].urn, roomTrans[0]);
-	 	CZloadModel(roomData[0].urn, roomTrans[1]);
-	 	CZloadModel(towerData[1].urn, towerTrans[0]);
+	 	// CZloadModel(floorData[0].urn);
+	 	// CZloadModel(roomData[0].urn, roomTrans[0]);
+	 	// CZloadModel(roomData[0].urn, roomTrans[1]);
+	 	// CZloadModel(towerData[1].urn, towerTrans[0]);
+	 	var para = {
+	 		type : "room",
+	 		infoId : 233
+	 	};
+	 	CZLoad(para, function(model, infoId){
+	 		console.log(model);
+	 		console.log(infoId);
+	 	})
 	 </script>
 
 

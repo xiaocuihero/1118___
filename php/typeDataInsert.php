@@ -28,12 +28,4 @@ $result=mysqli_query($con,$sql);
 
 echo $result;
 
-// $sql="SELECT u.id AS uid, u.realname AS un, p.id AS pid, p.projectname AS pn,c.Id AS cid, c.Subject AS content, c.Category AS planOrFinish FROM calendar c LEFT JOIN user u ON u.id=c.UPAccount LEFT JOIN project p ON p.id=c.Location WHERE u.id=".$uid." AND c.StartTime='".$today."' ORDER BY p.id, c.Category";
-// $result=mysqli_query($con,$sql);
-// if($result!=null) {	
-// 	while ($row = mysqli_fetch_assoc($result)){
-// 		array_push($para,$row);
-// 	}	
-// }
-// echo json_encode($para);
 ?>

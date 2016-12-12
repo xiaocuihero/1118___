@@ -10,6 +10,56 @@ function CZloadReferenceModel(url){
 	viewer.loadModel(urn, { globalOffset : globalOffset });
 }
 
+function CZLoadModelWith(data, callback){
+	viewer.loadModel(data.urn, { globalOffset : globalOffset, placementTransform: transformFormatMatrix(data), infoId : data.infoId},function(){
+		callback(viewer.model, viewer.model.myData.loadOptions.infoId);
+	});
+}
+
+/*
+	callback : block function, paramater is loaded model.
+	para : 
+		type 		: 	not null;
+						model type;
+							{"room","tower","cabinet","frame","slot"}
+						one of them;
+		pos_index 	: 	index of position. 
+						default:1,
+						option;
+		superId 	: 	model owner type id, the model id of which is the containner
+						default:1,
+						option;
+		selfId		: 	model type id
+						default:1,
+						need to be not null, but now is optional.
+		infoId		: 	info id. connet model to info data
+*/
+function CZLoad(para, callback){
+	$.ajax({
+		url:"./php/select.php",
+		type:"POST",
+		data: para,
+		dataType:"JSON",
+		success:function(data){
+			if (data.length > 0){
+				//para ? FIXIT...
+				var dataTemp = data[0];
+				dataTemp.infoId = para.infoId;
+				CZLoadModelWith(dataTemp, function(model, infoId){
+					callback(model, infoId);
+				});
+			}else{
+				console.log("CZLoad error 1");
+			}
+		},
+		error:function(e){
+			console.log(e);
+		}
+	})
+}
+
+
+
 function transformFormatMatrix(transf){
 	var m4 = new THREE.Matrix4();
 	var transform = transf || defaultData();
