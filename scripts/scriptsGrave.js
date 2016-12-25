@@ -226,3 +226,57 @@
 		// // dataTemp.rx += data.superTrans.rx;
 		// // dataTemp.ry += data.superTrans.ry;
 		// // dataTemp.rz += data.superTrans.rz;
+
+//-------------------------level2----------------------------
+
+	 // 	var roomTestData = {"type":"room", "superId":1, "selfId": 2, "pos_index":-1, "infoId":1};
+	 // 	var cabinetTestData = [
+	 // 		{"type":"cabinet", "superId":2, "selfId": 15, "pos_index":1, "infoId":1, "level":"button"},
+	 // 		{"type":"cabinet", "superId":2, "selfId": 20, "pos_index":2, "infoId":2, "level":"door_button"},
+	 // 		{"type":"cabinet", "superId":2, "selfId": 20, "pos_index":6, "infoId":3, "level":"door"},
+	 // 		{"type":"cabinet", "superId":2, "selfId": 2, "pos_index":3, "infoId":4},
+	 // 		{"type":"cabinet", "superId":2, "selfId": 9, "pos_index":4, "infoId":5},	 		
+	 // 	];
+
+	 // 	// var frameTestData = [
+	 // 	// 	// {"type":"frame", "superId":2, "selfId": 3, "pos_index":1, "infoId":7, "superInfoId":4},
+	 // 	// 	{"type":"frame", "superId":9, "selfId": 20, "pos_index":1, "infoId":8, "superInfoId":5}
+	 // 	// ];
+	 // 	var frameTestData = [
+		// 	{"type":"frame", "superId":15, "selfId":2,"Uheight":15, "infoId":10, "superInfoId":1},
+		// 	{"type":"frame", "superId":15, "selfId":1,"Uheight":2, "infoId":11, "superInfoId":1},
+		// 	{"type":"frame", "superId":15, "selfId":1,"Uheight":19, "infoId":12, "superInfoId":1},
+		// 	{"type":"frame", "superId":15, "selfId":15,"Uheight":11, "infoId":13, "superInfoId":1},
+		// 	{"type":"frame", "superId":15, "selfId":15,"Uheight":28, "infoId":14, "superInfoId":1},
+		// 	{"type":"frame", "superId":15, "selfId":12,"Uheight":14, "infoId":15, "superInfoId":1}
+		// ];
+
+		
+	// CZLoad(roomTestData,function(model,data){
+	 		// modelRoom = model;
+	 		// var strIds = data.hide_dbIds.split(",");
+	 		// if(strIds.length != null) {
+	 		// 	strIds.forEach((str)=>{
+	 		// 		dbIds.push(parseInt(str));
+	 		// 	});
+	 		// }
+	 	// });
+
+	 	// for (var i = 0; i < cabinetTestData.length; i++){
+			// var dataC = cabinetTestData[i];
+ 		// 	CZLoad(dataC, function(model, data) {
+ 		// 		for(var j = 0; j < frameTestData.length; j++){
+ 		// 			var dataF = frameTestData[j]; 
+ 		// 			// console.log(data);
+ 		// 			// console.log(dataF);					
+ 		// 			if (data.para.infoId == dataF.superInfoId) {
+ 		// 				dataF.superTrans = [data];
+ 		// 				// console.log(dataC.infoId);
+ 		// 				// console.log(dataF.superInfoId);
+ 		// 				CZLoad(dataF,function(modelf, dataf){
+ 		// 					// console.log(dataf);
+ 		// 				});
+ 		// 			}
+ 		// 		}
+	 	// 	});
+	 	// }

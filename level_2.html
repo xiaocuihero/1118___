@@ -17,23 +17,12 @@
 	<div>
 		<div id="MyViewerDiv" style="width: 1600px; position: relative; height: 1000px;float: left;"></div>
 		<div style="background-color: gray; width: 250px;position: relative; height: 1000px;float: right; ">
-			<!-- <button onclick="hide111()">hhhiiiiddddeee</button> -->
 		</div>
 	</div>
-
-	<!-- <input type="button" style="position: absolute; top: 0px; left:0px; z-index: 100;" onclick="LoadExtensionNeed()" value="extension"> -->
-
-<!-- 	<input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="step1()" value="step1">
-	<input type="button" style="position:absolute;top:0px;left:200px;z-index:100" onclick="step3()" value="step2">
-	<input type="button" style="position:absolute;top:0px;left:250px;z-index:100" onclick="stepAll()" value="stepAll"> -->
-
-	<!-- <input type="button" style="position:absolute;top:0px;left:50px;z-index:100" onclick="loads3()"> -->
-	<!-- <input type="button" style="position:absolute;top:0px;left:150px;z-index:100" onclick="test()"> -->
 
 	<!-- The Viewer JS -->
 	<script src="jquery-2.1.1.min.js"></script>
 	<script src="three.min.js"></script>
-	<!--  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v2.10"></script> -->
 	<link rel="stylesheet" href="style.min.css" type="text/css">
 	<script src="viewer3D.min.js"></script>	
 
@@ -42,226 +31,14 @@
 	 <script src="Autodesk.ADN.Viewing.Extension.TransformTool.js"></script>
 	 <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script>
 	 <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>
-
-<!-- 	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
-	 <script type="text/javascript" src="scripts/testData.js"></script> -->
 	 <script type="text/javascript" src="scripts/modelLoader.js"></script>
 	 <script type="text/javascript" src="scripts/toolbarControler.js"></script>	 
 	 <script type="text/javascript" src="scripts/showHide.js"></script>
+	 <script type="text/javascript" src="scripts/level2.js"></script>
 
 	 <style type="text/css">
 
 	 </style>
-
-	 <!-- Developer JS -->
-	 <script>
-	 	var roomTestData = {"type":"room", "superId":1, "selfId": 2, "pos_index":-1, "infoId":1};
-	 	var cabinetTestData = [
-	 		{"type":"cabinet", "superId":2, "selfId": 15, "pos_index":1, "infoId":1, "level":"button"},
-	 		{"type":"cabinet", "superId":2, "selfId": 20, "pos_index":2, "infoId":2, "level":"door_button"},
-	 		{"type":"cabinet", "superId":2, "selfId": 20, "pos_index":6, "infoId":3, "level":"door"},
-	 		{"type":"cabinet", "superId":2, "selfId": 2, "pos_index":3, "infoId":4},
-	 		{"type":"cabinet", "superId":2, "selfId": 9, "pos_index":4, "infoId":5},	 		
-	 	];
-
-	 	// var frameTestData = [
-	 	// 	// {"type":"frame", "superId":2, "selfId": 3, "pos_index":1, "infoId":7, "superInfoId":4},
-	 	// 	{"type":"frame", "superId":9, "selfId": 20, "pos_index":1, "infoId":8, "superInfoId":5}
-	 	// ];
-	 	var frameTestData = [
-			{"type":"frame", "superId":15, "selfId":2,"Uheight":15, "infoId":10, "superInfoId":1},
-			{"type":"frame", "superId":15, "selfId":1,"Uheight":2, "infoId":11, "superInfoId":1},
-			{"type":"frame", "superId":15, "selfId":1,"Uheight":19, "infoId":12, "superInfoId":1},
-			{"type":"frame", "superId":15, "selfId":15,"Uheight":11, "infoId":13, "superInfoId":1},
-			{"type":"frame", "superId":15, "selfId":15,"Uheight":28, "infoId":14, "superInfoId":1},
-			{"type":"frame", "superId":15, "selfId":12,"Uheight":14, "infoId":15, "superInfoId":1}
-		];
-
-
-	 	var myViewerDiv = document.getElementById('MyViewerDiv');
-	 	var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
-	 	var options = {
-	 		'env' : 'Local',
-	 		// 'document' : './svf/building.max/building.svf'
-	 	}; 	
-
-	 	var modelRoom = null;
-	 	var dbIds = [];
-
-		Autodesk.Viewing.Initializer(options, function() {
-	 		viewer.initialize ();	
-	 		viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {     
-	 			viewer.loadExtension('Autodesk.ADN.Viewing.Extension.TransformTool');
-	 			// deleteToolbar();
-	 			if (event.model.id == modelRoom.id){
-					viewer.setViewCube("[front],[top],[right]");
-	 				hide0(modelRoom, dbIds);					
-	 			}
-
-	 		});	
- 		});
- 	
-	</script>
-
-
-
-
-<!-- 	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
-	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
-	 <script type="text/javascript" src="scripts/showHide.js"></script> -->
-
-	 <script type="text/javascript">
-
-	 	// CZLoad(roomTestData,function(model,data){
-	 		// modelRoom = model;
-	 		// var strIds = data.hide_dbIds.split(",");
-	 		// if(strIds.length != null) {
-	 		// 	strIds.forEach((str)=>{
-	 		// 		dbIds.push(parseInt(str));
-	 		// 	});
-	 		// }
-	 	// });
-
-	 	// for (var i = 0; i < cabinetTestData.length; i++){
-			// var dataC = cabinetTestData[i];
- 		// 	CZLoad(dataC, function(model, data) {
- 		// 		for(var j = 0; j < frameTestData.length; j++){
- 		// 			var dataF = frameTestData[j]; 
- 		// 			// console.log(data);
- 		// 			// console.log(dataF);					
- 		// 			if (data.para.infoId == dataF.superInfoId) {
- 		// 				dataF.superTrans = [data];
- 		// 				// console.log(dataC.infoId);
- 		// 				// console.log(dataF.superInfoId);
- 		// 				CZLoad(dataF,function(modelf, dataf){
- 		// 					// console.log(dataf);
- 		// 				});
- 		// 			}
- 		// 		}
-	 	// 	});
-	 	// }
-		var models = [];
-		var infos = [];
-		var roomId = 1;
-
-		// viewer.loadModel("./svf/roomEtc/room/2500X2500X2800_level2rvt/Resource/____/3D/3D.svf");
-		// CZLoadFloor();
-		$.ajax({
-			url:"./php/selectInfoLevelTwo.php",
-			type:"POST",
-			data: {"roomId": roomId},
-			dataType:"JSON",
-			success:function(datas){
-				console.log(datas);
-				var rooms = [];
-				var cabinets = [];
-				var frames=[];
-				// var antennas = [];
-				for(var i in datas){
-					if(datas[i].type == "room"){
-						rooms.push(datas[i]);
-					}else if(datas[i].type == "cabinet"){
-						cabinets.push(datas[i]);						
-					}else if(datas[i].type == "frame"){
-						frames.push(datas[i]);
-					}
-				}
-				// console.log(rooms);
-				// console.log(cabinets);
-				// console.log(frames);
-				render(rooms, cabinets, frames);
-			},
-			error:function(e){
-				console.log(e.responseText);
-			}
-		});
-
-		function render(rooms, cabinets, frames){
- 			var data = rooms[0];	 			
- 			data.level = "two";
- 			data.pos_index = "-1";
- 			CZLoad(data, function(modelr, datar){
- 				// console.log(datar);
- 				infos.push(datar);
- 				modelRoom = modelr;
-		 		var strIds = datar.hide_dbIds.split(",");
-		 		if(strIds.length != null) {
-		 			strIds.forEach((str)=>{
-		 				dbIds.push(parseInt(str));
-		 			});
-		 		}
-	 		});
-
-	 		for(var i in cabinets){
-	 			var dataC = cabinets[i];
-	 			dataC.level = "door";
-	 			CZLoad(dataC, function(modelc, datac){
-	 				infos.push(datac);
-	 				console.log(datac);
-	 				var dataPara = datac.para;
-	 				if(dataPara.urn_other !== null || dataPara.urn_other!== undefined || dataPara.urn_other!==''){
-	 					console.log(233);
-	 				}else{
-	 					for(var k in frames){
-	 						var dataF = frames[k];
-	 						if(datac.para.infoId == dataF.superInfoId){
-	 							dataF.superTrans = datac.dataTransM4;
-	 							CZLoad(dataF, function(modelf, dataf){
-	 								infos.push(dataf);
-	 							})
-	 						}
-	 					}
-	 				}
-	 				
-		 		});
-	 		}
-		}
-
-		// function render(rooms, cabinets, frames){
-	 // 		for(var i in rooms){
-	 // 			var data = rooms[i];
-	 // 			data.pos_index = parseInt(i) + 1;
-	 // 			CZLoad(data, function(modelr, datar){
-	 // 				infos.push(datar);	 				
-		//  			// models.push(modelr);
-		//  		});
-	 // 		}
-	 // 		//Tower
-	 // 		for(var i in towers){
-	 // 			var dataT = towers[i];
-	 // 			CZLoad(dataT, function(modelt, datat){
-	 // 				infos.push(datat);
-		//  			// models.push(modelt);
-		//  			//Derrick
-		//  			for(var j in derricks){
-		//  				var dataD = derricks[j];
-		//  				if(datat.para.infoId == dataD.superInfoId){
-		//  					dataD.superTrans = datat.dataTransM4;
-		//  					CZLoad(dataD, function(modeld, datad){		 						
-		//  						infos.push(datad);
-		//  						// models.push(modeld);
-		//  						// Antenna
-		//  						for(var k in antennas){
-		//  							var dataA = antennas[k];
-		//  							if(datad.para.infoId == dataA.superInfoId){
-		//  								dataA.superTrans = datad.dataTransM4;
-		//  								console.log(dataA);
-		//  								CZLoad(dataA, function(modela, dataa){
-		//  									infos.push(dataa);
-		//  									// models.push(modela);
-		//  								});		 								
-		//  							}
-		//  						}
-		//  						// console.log(datad);
-		//  					});		
-		//  				}
-		//  			}			
-		//  		});
-	 // 		}	 		 		
-	 	// }
-
-	 </script>
-
+	 
 </body>
-
 </html>
