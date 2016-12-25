@@ -20,7 +20,7 @@ $superId = $type_super->$type;
 $selfId = $type_self->$type;
 
 // $sql = "INSERT INTO `cwr`.`".$tname."` (`id`,`pos_index`,`".$superId."`,`".$selfId."`, `tx`, `ty`, `tz`, `rx`, `ry`, `rz`) VALUES ";
-$sql = "INSERT INTO `cwr`.`".$tname."` (`pos_index`,`".$superId."`,`".$selfId."`, `tx`, `ty`, `tz`, `rx`, `ry`, `rz`) VALUES ";
+$sql = "INSERT INTO ".$tname." (`pos_index`,`".$superId."`,`".$selfId."`, `tx`, `ty`, `tz`, `rx`, `ry`, `rz`) VALUES ";
 
 $tdata = json_decode($tdata);
 
@@ -58,6 +58,6 @@ for($i = 0; $i < count($tdata); $i++){
 
 $result=mysqli_query($con,$sql);
 
-echo $result;
+echo json_encode($sql);
 
 ?>

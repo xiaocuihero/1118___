@@ -15,7 +15,7 @@ var urlPHPRoot = "http://localhost/1118___/";
 var pathDefault2 = "./svf/bbbbb/aaaaa/Resource/____/3D/3D.svf";
 var pathDefault1 = "./svf/aaaaa/Resource/____/3D/3D.svf";
 var pathDefault3 = "./svf/bbbbb/aaaaa/Resource/____/_3D_ 332258/_3D_.svf"
-
+var pathDefaultC = "./ALLsvf/cabinet/aaaaa/Resource/____/3D/3D.svf";
 
 
 
@@ -179,29 +179,33 @@ var watherTankData = [{"id":1, "type":"waterTank","name":"WaterTankrvt","urn":".
 
 var roomType = "room";
 var roomFolderName = "roomEtc/room";
-var roomNames = ["2400X2400X2800rvt","3300X2800X2800rvt","MiniShelterRoomrvt","Mini-shelterwithoutRacksrvt","Mini-shelterwithBatteryRacksrvt","Mini-shelterwithCombinationRacksrvt","Mini-shelterwithBTSRacksrvt"];
+var roomNames = ["2500X2500X2800_level1rvt","2500X2500X2800_level2rvt","3300X2800X2800_level1rvt","3300X2800X2800_level2rvt","MiniShelterRoomrvt","Mini-shelterwithoutRacksrvt","Mini-shelterwithBatteryRacksrvt","Mini-shelterwithCombinationRacksrvt","Mini-shelterwithBTSRacksrvt"];
 function dataFormatRoom(){
 	return dataFormat(roomNames, roomFolderName, roomType);
 }
 var roomData = [
-	{"id":1,"type":"room","name":"2400X2400X2800rvt","urn":"./svf/roomEtc/room/2400X2400X2800rvt/Resource/____/3D/3D.svf"},
-	{"id":2,"type":"room","name":"3300X2800X2800rvt","urn":"./svf/roomEtc/room/3300X2800X2800rvt/Resource/____/3D/3D.svf"},
-	{"id":3,"type":"room","name":"MiniShelterRoomrvt","urn":"./svf/roomEtc/room/MiniShelterRoomrvt/Resource/____/3D/3D.svf"},
-	{"id":4,"type":"room","name":"Mini-shelterwithoutRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithoutRacksrvt/Resource/____/3D/3D.svf"},
-	{"id":5,"type":"room","name":"Mini-shelterwithBatteryRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithBatteryRacksrvt/Resource/____/3D/3D.svf"},
-	{"id":6,"type":"room","name":"Mini-shelterwithCombinationRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithCombinationRacksrvt/Resource/____/3D/3D.svf"},
-	{"id":7,"type":"room","name":"Mini-shelterwithBTSRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithBTSRacksrvt/Resource/____/3D/3D.svf"}
+	{"id":1,"type":"room","name":"2500X2500X2800_level1rvt","urn":"./svf/roomEtc/room/2500X2500X2800_level1rvt/Resource/____/3D/3D.svf"},
+	{"id":2,"type":"room","name":"2500X2500X2800_level2rvt","urn":"./svf/roomEtc/room/2500X2500X2800_level2rvt/Resource/____/3D/3D.svf"},
+	{"id":3,"type":"room","name":"3300X2800X2800_level1rvt","urn":"./svf/roomEtc/room/3300X2800X2800_level1rvt/Resource/____/3D/3D.svf"},
+	{"id":4,"type":"room","name":"3300X2800X2800_level2rvt","urn":"./svf/roomEtc/room/3300X2800X2800_level2rvt/Resource/____/3D/3D.svf"},
+	{"id":5,"type":"room","name":"MiniShelterRoomrvt","urn":"./svf/roomEtc/room/MiniShelterRoomrvt/Resource/____/3D/3D.svf"},
+	{"id":6,"type":"room","name":"Mini-shelterwithoutRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithoutRacksrvt/Resource/____/3D/3D.svf"},
+	{"id":7,"type":"room","name":"Mini-shelterwithBatteryRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithBatteryRacksrvt/Resource/____/3D/3D.svf"},
+	{"id":8,"type":"room","name":"Mini-shelterwithCombinationRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithCombinationRacksrvt/Resource/____/3D/3D.svf"},
+	{"id":9,"type":"room","name":"Mini-shelterwithBTSRacksrvt","urn":"./svf/roomEtc/room/Mini-shelterwithBTSRacksrvt/Resource/____/3D/3D.svf"}
 ];
 
 
 
 var floorType = "floor";
 var floorFolderName = "floor";
-var floorNames = ["floor10X10"];
+var floorNames = ["floor15X15"];
 function dataFormatFloor(){
 	return dataFormat(floorNames, floorFolderName, floorType, pathDefault3);
 }
-var floorData = [{"id":1, "type":"floor","name":"floor10X10","urn":"./svf/floor/floor10X10/Resource/____/_3D_ 332258/_3D_.svf"}];
+var floorData = [
+{"id":1, "type":"floor","name":"floor15X15","urn":"./svf/floor/floor15X15/Resource/____/3D/3D.svf"}
+];
 
 
 
@@ -234,10 +238,7 @@ var derrickData = [
 
 
 
-var allData = {"wirelessData":wirelessData, "microwaveData":microwaveData,"towerData":towerData,"poleData":poleData,"billboardData":billboardData,
-"wallMountData":wallMountData,"watherTankData":watherTankData,"roomData":roomData,"floorData":floorData,
-"cabinetData":cabinetData,"derrickData":derrickData};
-
+// "derrickData":derrickData,"billboardData":billboardData,"poleData":poleData,"wirelessData":wirelessData, "microwaveData":microwaveData, "wallMountData":wallMountData,"watherTankData":watherTankData
 
 // var CabinetData=[
 // 	{"id":0,"type":"Cabinet","name":"BTS3900","urn":"./ALLsvf/cabinet/BTS3900/Resource/____/3D/3D.svf"},
@@ -260,7 +261,7 @@ var allData = {"wirelessData":wirelessData, "microwaveData":microwaveData,"tower
 // 	{"id":17,"type":"Cabinet","name":"EMERSONdoor","urn":"./ALLsvf/cabinet/EMERSONdoor/Resource/____/3D/3D.svf"},
 // 	{"id":18,"type":"Cabinet","name":"TPB48200Bdoor","urn":"./ALLsvf/cabinet/TPB48200Bdoor/Resource/____/3D/3D.svf"}];		
 var CabinetData=[
-{"id":1,"type":"Cabinet","name":"BTS3900","urn":"./ALLsvf/cabinet/BTS3900/Resource/____/3D/3D.svf","superId":null},
+{"id":1,"type":"Cabinet","name":"BTS3900button","urn":"./ALLsvf/cabinet/BTS3900button/Resource/____/3D/3D.svf","superId":null},
 {"id":2,"type":"Cabinet","name":"19Inch","urn":"./ALLsvf/cabinet/19Inch/Resource/____/3D/3D.svf","superId":null},
 {"id":3,"type":"Cabinet","name":"ACcontrolpanel","urn":"./ALLsvf/cabinet/ACcontrolpanel/Resource/____/3D/3D.svf","superId":null},
 {"id":4,"type":"Cabinet","name":"ACCESSCONTROLPANEL","urn":"./ALLsvf/cabinet/ACCESSCONTROLPANEL/Resource/____/3D/3D.svf","superId":null},
@@ -275,10 +276,12 @@ var CabinetData=[
 {"id":13,"type":"Cabinet","name":"TOPCOOL1AC-1","urn":"./ALLsvf/cabinet/TOPCOOL1AC-1/Resource/____/3D/3D.svf","superId":null},
 {"id":14,"type":"Cabinet","name":"TOPCOOLAC","urn":"./ALLsvf/cabinet/TOPCOOLAC/Resource/____/3D/3D.svf","superId":null},
 {"id":15,"type":"Cabinet","name":"TPB48200B","urn":"./ALLsvf/cabinet/TPB48200B/Resource/____/3D/3D.svf","superId":null},
-{"id":16,"type":"Cabinet","name":"BTS3900door","urn":"./ALLsvf/cabinet/BTS3900door/Resource/____/3D/3D.svf","superId":null},
+{"id":16,"type":"Cabinet","name":"BTS3900buttondoor","urn":"./ALLsvf/cabinet/BTS3900buttondoor/Resource/____/3D/3D.svf","superId":null},
 {"id":17,"type":"Cabinet","name":"BTS3900Ldoor","urn":"./ALLsvf/cabinet/BTS3900Ldoor/Resource/____/3D/3D.svf","superId":null},
 {"id":18,"type":"Cabinet","name":"EMERSONdoor","urn":"./ALLsvf/cabinet/EMERSONdoor/Resource/____/3D/3D.svf","superId":null},
-{"id":19,"type":"Cabinet","name":"TPB48200Bdoor","urn":"./ALLsvf/cabinet/TPB48200Bdoor/Resource/____/3D/3D.svf","superId":null}
+{"id":19,"type":"Cabinet","name":"TPB48200Bdoor","urn":"./ALLsvf/cabinet/TPB48200Bdoor/Resource/____/3D/3D.svf","superId":null},
+{"id":20,"type":"Cabinet","name":"BTS3900","urn":"./ALLsvf/cabinet/BTS3900/Resource/____/3D/3D.svf","superId":null},
+{"id":21,"type":"Cabinet","name":"BTS3900door","urn":"./ALLsvf/cabinet/BTS3900door/Resource/____/3D/3D.svf","superId":null}
 ];
 // var FrameData=[
 // 	{"id":0,"type":"Frame","name":"RFU","urn":"./ALLsvf/slot/RFU/RFUcabinet/Resource/____/3D/3D.svf"},
@@ -534,6 +537,7 @@ var SlotData=[
 ];
 
 
+var allData = {"towerData":towerData,"roomData":roomData,"floorData":floorData,"cabinetData":CabinetData,"FrameData":FrameData};
 
 
 var insertTypeDatas = {"cabinet_type":CabinetData, "room_type":roomData, "tower_type":towerData, "slot_type":SlotData, "frame_type":FrameData};

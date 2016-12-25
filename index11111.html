@@ -116,7 +116,10 @@
 	 <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script>
 	 <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>
 
-	 <script type="text/javascript" src="scripts/aaa.js"></script>
+	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
+	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
+	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
+	 <script type="text/javascript" src="scripts/showHide.js"></script>
 
 	 <style type="text/css">
 
@@ -124,6 +127,10 @@
 
 	 <!-- Developer JS -->
 	 <script>
+	 	var allTypeData = {"floor" : floorData, "room" : null, "tower" : null, "cabinet" : null, "frame" : null, "slot" : null, "derrick":null, "antenna": null};
+
+	 	// var dbIds = [3629,3620,3621,3622,3623];
+	 	var dbIds = [3647,3640,3653,3639,3638,3641,3688,3682];	 	
 	 	var myViewerDiv = document.getElementById('MyViewerDiv');
 	 	var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
 	 	var options = {
@@ -135,14 +142,14 @@
 	 	Autodesk.Viewing.Initializer(options, function() {
 	 		viewer.initialize ();	
 	 		viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {                    
-	 			// viewer.fitToView (false) ;
+	 			// viewer.fitToView (false);
 	 			viewer.loadExtension('Autodesk.ADN.Viewing.Extension.TransformTool');
 	 			// viewer.setViewCube("[],[top],[]");
 	 			// viewer.autocam.animateTransition(new THREE.Vector3(0,0,10));
 	 			// viewer.autocam.camera.position = new THREE.Vector3(0,0,1000);
 	 			// var center = new THREE.Vector3(0,0,0);
-	 			// viewer.autocam.camera.lookAt(center);	
-
+	 			// viewer.autocam.camera.lookAt(center);
+	 			// hide0(otherModel,dbIds);
 
 	 		}) ;	
 	 	});	
@@ -151,14 +158,11 @@
  	
 	</script>
 
-	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
-	 <script type="text/javascript" src="scripts/transformHelper.js"></script>	 
-	 <script type="text/javascript" src="scripts/transformInfoReader.js"></script>
-	 <script type="text/javascript" src="scripts/showHide.js"></script>
+
 
 	 <script type="text/javascript">
 
-	 	adjustDataInit(wirelessData[0].urn);
+	 	adjustDataInit(roomData[0].urn);
 	 	selectInit();
 	 	// adjustInit();
 	 	function getTransformData(){
@@ -175,53 +179,121 @@
 	 	}
 
 		function selectInit(){
-			// for(var i = 0; i < allData.length; i++){
-			// 	var html = "<option value='Value1'>Text</option>".replace("Value1",i).replace("Text",);
-			// }
+
 			$("#modelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
-			for(var key in allData){				
+			for(var key in allTypeData){				
 				$("#modelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
 			}
 			$("#modelSelect").change(function(){
-				console.log(1);
 				var keyt = $(this).children('option:selected').val();
-				$("#ModelSelectNext").empty();
-				$("#ModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
-				for(var item in allData[keyt.toString()]){					
-					var obj = allData[keyt.toString()][item];
-					var name = obj.name;
-					$("#ModelSelectNext").append("<option value='"+ item +"'>"+ name +"</option>");					
-				}
-				$("#ModelSelectNext").off( "change" );
-				$("#ModelSelectNext").change(function(){
-					var keytt = $(this).children('option:selected').val();
-					var obj = allData[keyt.toString()][keytt];
-					CZModelReload(obj.urn);
-				});
+				level2SelectUpdate("ModelSelectNext", keyt, false);
 			});
 
 			$("#rmodelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
-			for(var key in allData){				
+			for(var key in allTypeData){				
 				$("#rmodelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
 			}
 			$("#rmodelSelect").change(function(){
-				// console.log(1);
 				var keyt = $(this).children('option:selected').val();
-				$("#rModelSelectNext").empty();
-				$("#rModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
-				for(var item in allData[keyt.toString()]){
-					var obj = allData[keyt.toString()][item];
-					var name = obj.name;
-					$("#rModelSelectNext").append("<option value='"+ item +"'>"+ name +"</option>");					
-				}
-				$("#rModelSelectNext").off( "change" );	
-				$("#rModelSelectNext").change(function(){
-					var keytt = $(this).children('option:selected').val();
-					var obj = allData[keyt.toString()][keytt];
-					CZReferenceModelReload(obj.urn);
-				});			
+				level2SelectUpdate("rModelSelectNext", keyt, true);				
 			});
+
+			function level2SelectUpdate(selectId, keyt, isReference){
+				if(allTypeData[keyt.toString()]){
+					level2SelectBuild(selectId, keyt, isReference);
+				}else{
+					$.ajax({
+						url:"./php/selectType.php",
+						type:"POST",
+						data: {"type" : keyt},
+						dataType:"JSON",
+						success:function(data){
+							if (data.length > 0){
+								// console.log(1);
+								// console.log(data);
+								allTypeData[keyt.toString()] = data;
+								level2SelectBuild(selectId, keyt, isReference);
+							}else{
+								console.log("selectInit error 1");
+							}
+						},
+						error:function(e){
+							console.log(e);
+						}
+					});
+				}
+
+				function level2SelectBuild(selectId, keyt, isReference){
+					$("#" + selectId).empty();
+					$("#" + selectId).append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+					for(var item in allTypeData[keyt.toString()]){					
+						var obj = allTypeData[keyt.toString()][item];
+						var name = obj.name;
+						$("#" + selectId).append("<option value='"+ item +"'>"+ name + "__" +obj.id +"</option>");
+					}				
+					$("#" + selectId).off( "change" );
+					$("#" + selectId).change(function(){
+						var keytt = $(this).children('option:selected').val();
+						var obj = allTypeData[keyt.toString()][keytt];
+						if (isReference){
+							CZReferenceModelReload(obj.urn);
+						}else{
+							CZModelReload(obj.urn);
+						}
+						$("#optionOn").attr("src", obj.urn+".png");
+					});
+				}
+			}			
 		}
+
+		// function selectInit(){
+		// 	// for(var i = 0; i < allData.length; i++){
+		// 	// 	var html = "<option value='Value1'>Text</option>".replace("Value1",i).replace("Text",);
+		// 	// }
+		// 	$("#modelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+		// 	for(var key in allData){				
+		// 		$("#modelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
+		// 	}
+		// 	$("#modelSelect").change(function(){
+		// 		console.log(1);
+		// 		var keyt = $(this).children('option:selected').val();
+		// 		$("#ModelSelectNext").empty();
+		// 		$("#ModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+		// 		for(var item in allData[keyt.toString()]){					
+		// 			var obj = allData[keyt.toString()][item];
+		// 			var name = obj.name;
+		// 			$("#ModelSelectNext").append("<option value='"+ item +"'>"+ name +"</option>");					
+		// 		}
+		// 		$("#ModelSelectNext").off( "change" );
+		// 		$("#ModelSelectNext").change(function(){
+		// 			var keytt = $(this).children('option:selected').val();
+		// 			var obj = allData[keyt.toString()][keytt];
+		// 			CZModelReload(obj.urn);
+		// 		});
+		// 	});
+
+		// 	$("#rmodelSelect").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+		// 	for(var key in allData){				
+		// 		$("#rmodelSelect").append("<option value='"+ key +"'>"+ key +"</option>");
+		// 	}
+		// 	$("#rmodelSelect").change(function(){
+		// 		// console.log(1);
+		// 		var keyt = $(this).children('option:selected').val();
+		// 		$("#rModelSelectNext").empty();
+		// 		$("#rModelSelectNext").append("<option value='"+ "-----" +"'>"+ "-----" +"</option>");
+		// 		for(var item in allData[keyt.toString()]){
+		// 			var obj = allData[keyt.toString()][item];
+		// 			var name = obj.name;
+		// 			$("#rModelSelectNext").append("<option value='"+ obj.id +"'>"+ name +"</option>");					
+		// 		}
+		// 		$("#rModelSelectNext").off( "change" );	
+		// 		$("#rModelSelectNext").change(function(){
+		// 			var keytt = $(this).children('option:selected').val();
+		// 			var obj = allData[keyt.toString()][keytt];
+		// 			CZReferenceModelReload(obj.urn);
+		// 		});			
+		// 	});
+		// }
 
 		function buttonBuild(){			
 			console.log("rb");
@@ -239,6 +311,7 @@
 		function insertModel(){
 			var first = $("#modelSelect").children('option:selected').val();
 			var second = $("#ModelSelectNext").children('option:selected').val();
+			// var superId = $("#rModelSelectNext").children('option:selected').val();
 			addNewModel(first, second, buttonBuild);
 		}
 
@@ -250,8 +323,6 @@
 			var sid = parseInt($("#value01").val());
 			$("#rs").val(arrayDataPrase(sid));
 		}
-
-
 
 	 </script>
 

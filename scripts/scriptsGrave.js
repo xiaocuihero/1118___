@@ -84,118 +84,145 @@
 
 
 
-	 	function OnSelectedChanged0(selections){
-	 		var selection = null;
-	 		if (selections.length){
-	 			selection = selections[0];
-	 		}else{
-	 			selection = selections;
-	 		}
-	 		OnSelectedChanged(selection.nodeArray,selection.nodeArray.length
-	 			,selection.dbIdArray,selection.dbIdArray.length
-	 			,selection.fragIdsArray,selection.fragIdsArray.length,selection.model.id);
-	 		var fragProxy = viewer.impl.getFragmentProxy(selection.model,selection.fragIdsArray[0]);
+	 // 	function OnSelectedChanged0(selections){
+	 // 		var selection = null;
+	 // 		if (selections.length){
+	 // 			selection = selections[0];
+	 // 		}else{
+	 // 			selection = selections;
+	 // 		}
+	 // 		OnSelectedChanged(selection.nodeArray,selection.nodeArray.length
+	 // 			,selection.dbIdArray,selection.dbIdArray.length
+	 // 			,selection.fragIdsArray,selection.fragIdsArray.length,selection.model.id);
+	 // 		var fragProxy = viewer.impl.getFragmentProxy(selection.model,selection.fragIdsArray[0]);
 
-	 		console.log(selection.model.getData());
-	 		var m4 = selection.model.getData().loadOptions.placementTransform;
-	 		var pos = new THREE.Vector3();
-	 		pos.setFromMatrixPosition(m4);
+	 // 		console.log(selection.model.getData());
+	 // 		var m4 = selection.model.getData().loadOptions.placementTransform;
+	 // 		var pos = new THREE.Vector3();
+	 // 		pos.setFromMatrixPosition(m4);
 
-	 		var globaloffsetTemp = selection.model.getData().globalOffset;
+	 // 		var globaloffsetTemp = selection.model.getData().globalOffset;
 
-		    // console.log(pos);
-		    // console.log(globaloffsetTemp);
+		//     // console.log(pos);
+		//     // console.log(globaloffsetTemp);
 
-		    var fragProxy = viewer.impl.getFragmentProxy(selection.model, selection.fragIdsArray);
-		    // fragProxy.position.set(1,1,1);
-		    // fragProxy.updateAnimTransform();
-		    // viewer.impl.sceneUpdated(true);
-		    console.log(fragProxy);
-		}
+		//     var fragProxy = viewer.impl.getFragmentProxy(selection.model, selection.fragIdsArray);
+		//     // fragProxy.position.set(1,1,1);
+		//     // fragProxy.updateAnimTransform();
+		//     // viewer.impl.sceneUpdated(true);
+		//     console.log(fragProxy);
+		// }
 
-		function centerRotate(model,rotateV3){
+		// function centerRotate(model,rotateV3){
 
-			var rv3 = rotateV3 || new THREE.Vector3();
+		// 	var rv3 = rotateV3 || new THREE.Vector3();
 
-			var rotateBox = model.getData().bbox;
-			console.log(rotateBox);
-			var center= new THREE.Vector3(
-				(rotateBox.min.x + rotateBox.max.x) / 2,
-				(rotateBox.min.y + rotateBox.max.y) / 2,
-				(rotateBox.min.z + rotateBox.max.z) / 2 )
+		// 	var rotateBox = model.getData().bbox;
+		// 	console.log(rotateBox);
+		// 	var center= new THREE.Vector3(
+		// 		(rotateBox.min.x + rotateBox.max.x) / 2,
+		// 		(rotateBox.min.y + rotateBox.max.y) / 2,
+		// 		(rotateBox.min.z + rotateBox.max.z) / 2 )
 
-			var transform = {
-				translation: getTranslation(0,0,0),
-				rotation: getRotation(rv3.x, rv3.y, rv3.z)
-			};
-
-
-			var fragCount = model.getFragmentList().
-			fragments.fragId2dbId.length;
-
-			for(var fragId=0; fragId<fragCount; ++fragId){
-
-				_transformFragProxy(fragId);
-			}
-
-			function  _transformFragProxy(fragId){
-				var fragProxy = viewer.impl.getFragmentProxy(model, fragId);
-				console.log(fragProxy);
-				var translateOrigin = model.getData().loadOptions.translate || new THREE.Vector3();
-				fragProxy.getAnimTransform();
-				var position = new THREE.Vector3(
-					fragProxy.position.x - center.x,
-					fragProxy.position.y - center.y,
-					fragProxy.position.z - center.z);
-					// fragProxy.position.x + translateOrigin.x - center.x,
-					// fragProxy.position.y + translateOrigin.x - center.y,
-					// fragProxy.position.z + translateOrigin.x - center.z)
-				// console.log(transform);
-				   // fragProxy.position.center = center;
-		    	// fragProxy.getAnimTransform();	
-				position.applyQuaternion(transform.rotation);
-				position.add(center);
-				console.log(center);
-				return position;
-				// 				console.log(fragProxy.position);
-				// console.log(position);
-
-				fragProxy.position = position;
+		// 	var transform = {
+		// 		translation: getTranslation(0,0,0),
+		// 		rotation: getRotation(rv3.x, rv3.y, rv3.z)
+		// 	};
 
 
-				fragProxy.quaternion._x = transform.rotation.x;
-				fragProxy.quaternion._y = transform.rotation.y;
-				fragProxy.quaternion._z = transform.rotation.z;
-				fragProxy.quaternion._w = transform.rotation.w;
-				fragProxy.updateAnimTransform();
+		// 	var fragCount = model.getFragmentList().
+		// 	fragments.fragId2dbId.length;
 
-			}  
-			viewer.impl.sceneUpdated(true);
-		}
+		// 	for(var fragId=0; fragId<fragCount; ++fragId){
 
-		function CCTransform(model){
-			console.log("rotate");	
-			var transform = {
-				translation: getTranslation(),
-				rotation: getRotation()
-			};
+		// 		_transformFragProxy(fragId);
+		// 	}
 
-			var fragCount = model.getFragmentList().fragments.fragId2dbId.length;
+		// 	function  _transformFragProxy(fragId){
+		// 		var fragProxy = viewer.impl.getFragmentProxy(model, fragId);
+		// 		console.log(fragProxy);
+		// 		var translateOrigin = model.getData().loadOptions.translate || new THREE.Vector3();
+		// 		fragProxy.getAnimTransform();
+		// 		var position = new THREE.Vector3(
+		// 			fragProxy.position.x - center.x,
+		// 			fragProxy.position.y - center.y,
+		// 			fragProxy.position.z - center.z);
+		// 			// fragProxy.position.x + translateOrigin.x - center.x,
+		// 			// fragProxy.position.y + translateOrigin.x - center.y,
+		// 			// fragProxy.position.z + translateOrigin.x - center.z)
+		// 		// console.log(transform);
+		// 		   // fragProxy.position.center = center;
+		//     	// fragProxy.getAnimTransform();	
+		// 		position.applyQuaternion(transform.rotation);
+		// 		position.add(center);
+		// 		console.log(center);
+		// 		return position;
+		// 		// 				console.log(fragProxy.position);
+		// 		// console.log(position);
 
-			for(var fragId=0; fragId<fragCount; ++fragId){
-				_transformFragProxy(fragId);
-			}
+		// 		fragProxy.position = position;
 
-			function  _transformFragProxy(fragId){
-				var fragProxy = viewer.impl.getFragmentProxy(model, fragId);
-				console.log(fragProxy);
-				fragProxy.getAnimTransform();
-				fragProxy.position = transform.translation;
-				fragProxy.quaternion._x = transform.rotation.x;
-				fragProxy.quaternion._y = transform.rotation.y;
-				fragProxy.quaternion._z = transform.rotation.z;
-				fragProxy.quaternion._w = transform.rotation.w;
-				fragProxy.updateAnimTransform();
-			}  
-			viewer.impl.sceneUpdated(true);
-		}
+
+		// 		fragProxy.quaternion._x = transform.rotation.x;
+		// 		fragProxy.quaternion._y = transform.rotation.y;
+		// 		fragProxy.quaternion._z = transform.rotation.z;
+		// 		fragProxy.quaternion._w = transform.rotation.w;
+		// 		fragProxy.updateAnimTransform();
+
+		// 	}  
+		// 	viewer.impl.sceneUpdated(true);
+		// }
+
+		// function CCTransform(model){
+		// 	console.log("rotate");	
+		// 	var transform = {
+		// 		translation: getTranslation(),
+		// 		rotation: getRotation()
+		// 	};
+
+		// 	var fragCount = model.getFragmentList().fragments.fragId2dbId.length;
+
+		// 	for(var fragId=0; fragId<fragCount; ++fragId){
+		// 		_transformFragProxy(fragId);
+		// 	}
+
+		// 	function  _transformFragProxy(fragId){
+		// 		var fragProxy = viewer.impl.getFragmentProxy(model, fragId);
+		// 		console.log(fragProxy);
+		// 		fragProxy.getAnimTransform();
+		// 		fragProxy.position = transform.translation;
+		// 		fragProxy.quaternion._x = transform.rotation.x;
+		// 		fragProxy.quaternion._y = transform.rotation.y;
+		// 		fragProxy.quaternion._z = transform.rotation.z;
+		// 		fragProxy.quaternion._w = transform.rotation.w;
+		// 		fragProxy.updateAnimTransform();
+		// 	}  
+		// 	viewer.impl.sceneUpdated(true);
+		// }
+//--------------level1------------------------
+				 					// var superTrans = {};
+		 					// superTrans.tx = datat.tx;
+		 					// superTrans.ty = datat.ty;
+		 					// superTrans.tz = datat.tz;
+		 					// superTrans.rx = datat.rx;
+		 					// superTrans.ry = datat.ry;
+		 					// superTrans.rz = datat.rz;
+		 					// dataD.superTrans = [superTrans];
+		 					// var newM4 = new THREE.Matrix4();
+		 					// newM4 = datat.dataTransM4;
+		 					// dataD.superTrans = modelt.myData.loadOptions.placementTransform;
+//---------------------czload------------------------------
+		 							// var tempM4 = new THREE.Matrix4();
+		// // for(var i = 0; i < data.superTrans.length; i++){
+		// var superTransM4 = transformFormatMatrix(data.superTrans[0]);
+		// var superTransM4 = data.superTrans[0];
+		// tempM4.multiply(superTransM4);
+		// // }
+		// tempM4.multiply(transM4);
+		// transM4 = tempM4;
+		// // dataTemp.tx += data.superTrans.tx;
+		// // dataTemp.ty += data.superTrans.ty;
+		// // dataTemp.tz += data.superTrans.tz;
+		// // dataTemp.rx += data.superTrans.rx;
+		// // dataTemp.ry += data.superTrans.ry;
+		// // dataTemp.rz += data.superTrans.rz;

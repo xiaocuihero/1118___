@@ -18,8 +18,8 @@
 				model.getObjectTree((instanceTree)=> {
 					var vm = new Autodesk.Viewing.Private.VisibilityManager(
 						viewer.impl,
-						viewer.model);
-					dbIds.forEach((dbId)=> {					
+						model);
+					dbIds.forEach((dbId)=> {
 						var node=dbId;
 						vm.hide(node);
 						vm.setNodeOff(node, nodeOff);

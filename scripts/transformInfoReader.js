@@ -175,7 +175,7 @@ function addNewModel(firstClass, secondClass, callback1){
 	var lastPosition = fragProxy.position.add(center);
 	var placementTransform = buildTransformMatrixExt0(lastPosition.x, lastPosition.y, lastPosition.z, rx, ry, rz);
 
-	var dataT = allData[firstClass.toString()][secondClass];
+	var dataT = allTypeData[firstClass.toString()][secondClass];
 	var data = {};
 	data.selfId = dataT.id;
 	data.tx = lastPosition.x;
@@ -211,5 +211,7 @@ function arrayDataPrase(super_id){
 		arr.push(data);
 	}
 	// console.log(arr);
-	return JSON.stringify(arr);
+	var rs = JSON.stringify(arr);
+	rs = rs.replace(/},{/g, "},\r\n{");
+	return rs;
 }

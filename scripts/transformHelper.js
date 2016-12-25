@@ -83,8 +83,8 @@
 			var modelId = selection.model.id;			
 			var modelurn = selection.model.getData().urn;
 		 		
-	 		$("#dbId").html("dbId: " + dbId + "___count: " + dbCount);
-	 		$("#fragId").html("fragId: " + fragId + "___count: " + fragCount);
+	 		$("#dbId").html("dbId: " + dbId + ";___count: " + dbCount);
+	 		$("#fragId").html("fragId: " + fragId + ";___count: " + fragCount);
 	 		$("#modelId").html("modelId:" + modelId);
-	 		$("#modelsvf").html("model urn : " + modelurn);
+	 		$("#modelsvf").html(" : " + modelurn);
 	 	}

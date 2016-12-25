@@ -99,7 +99,7 @@ Autodesk.ADN.Viewing.Extension.TransformTool =  function (viewer, options) {
             if(event.selections && event.selections.length) {
 
                 var selection = event.selections[0];
-				selhide=event.selections[0];
+				selhide = event.selections[0];
                 fragIdsArray = selection.fragIdsArray;
 				//console.log(selhide);
 				var model = selection.model;
