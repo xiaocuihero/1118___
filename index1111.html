@@ -194,7 +194,7 @@
 	 	// CZLoad(roomTestData,function(model,data){});
 
 
-	 	adjustDataInit();
+	 	// adjustDataInit();
 	 	selectInit();
 	 	// adjustInit();
 	 	function getTransformData(){
@@ -219,6 +219,9 @@
 	 	function printTestModel(){
 	 		translateTest();
 	 	}
+
+
+
 
 	 	function clearTestModel(){
 
@@ -284,23 +287,39 @@
 			// }
 			// InsertTransform("room", tempArr);
 			// InsertTransform("cabinet", tempArr);
-			var tttDatas = [];
 			// for(var k = 0; k < 3; k++){
-				for(var i = 0; i < 15; i++){
-					var datas = dataBySuper(i + 1, DerrickData2);
-					for(var j = 0; j < datas.length; j++){
-						var data = datas[j];
-						data.pos_index= j + 1;
-						data.selfId = 3;
-						tttDatas.push(data);
-					}
-				}
+				// for(var i = 0; i < 15; i++){
+				// 	var datas = dataBySuper(i + 1, DerrickData2);
+				// 	for(var j = 0; j < datas.length; j++){
+				// 		var data = datas[j];
+				// 		data.pos_index= j + 1;
+				// 		data.selfId = 3;
+				// 		tttDatas.push(data);
+				// 	}
+				// }
 			// }
 			// console.log(tttDatas);
 			// InsertTransform("derrick", tttDatas);
 			// InsertTransform("antenna", AntennaData);
+	 		console.log(1);
+			var tttDatas = [];
+			for(var i = 0; i < 15; i++){
+				// for(var j = 0; j < 4; j++){
+				// 	var data = {};
+				// 	data = $.extend(data, roomTrans_2[j]);
+				// 	// data = roomTrans_2[j];
+				// 	data.selfId = i + 1;
+				// 	tttDatas.push(data);
+				// }
+				var data = {};
+				data = $.extend(data, towerTrans_2[0]);
+				data.selfId = i + 1;
+				tttDatas.push(data);
+			}
+			// console.log(tttDatas);	
 
-
+			InsertTransform("tower", tttDatas);
+			// InsertTransform("room", tttDatas);
 			function dataBySuper(index, datas){
 				var arr = [];
 				for(var i = 0; i < datas.length; i++){

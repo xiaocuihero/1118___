@@ -26,10 +26,11 @@ $superIdc = $type_super->$type;
 $selfIdc = $type_self->$type;
 $tTransName = $type_table_trans->$type;
 $tHide = $type_hide->$type;
+$tstander_height = $type_stander_height->$type;
 $urnOther = $level_urn->$level;
 
 $rs=[];
-$sql="SELECT type.id, type.urn, type.".$urnOther." urn_other, ".$tHide." tr.tx, tr.ty, tr.tz, tr.rx, tr.ry, tr.rz FROM ".$tTypeName." type INNER JOIN ".$tTransName." tr ON type.id=tr.".$selfIdc."  where type.id=".$selfId." and tr.pos_index='".$pos_index."' and tr.".$superIdc."=".$superId;
+$sql="SELECT type.id, type.urn, type.".$urnOther." urn_other, ".$tHide." tr.tx, tr.ty, tr.tz, tr.rx, tr.ry, tr.rz".$tstander_height." FROM ".$tTypeName." type INNER JOIN ".$tTransName." tr ON type.id=tr.".$selfIdc."  where type.id=".$selfId." and tr.pos_index='".$pos_index."' and tr.".$superIdc."=".$superId;
 $result=mysqli_query($con, $sql);
 if ($result != null) {
 	while ($row = mysqli_fetch_assoc($result)) {

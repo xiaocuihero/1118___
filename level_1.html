@@ -24,60 +24,20 @@
 	<!-- The Viewer JS -->
 	<script src="jquery-2.1.1.min.js"></script>
 	<script src="three.min.js"></script>
-	<!--  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v2.10"></script> -->
 	<link rel="stylesheet" href="style.min.css" type="text/css">
 	<script src="viewer3D.min.js"></script>	
  	
-	 <script src="Autodesk.ADN.Viewing.Extension.Move.js"></script>-->
-	 <script src="Autodesk.ADN.Viewing.Extension.TransformTool.js"></script>
-	 <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script>
-	 <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>	 
+	 <!-- <script src="Autodesk.ADN.Viewing.Extension.Move.js"></script>--> -->
+	 <!-- <script src="Autodesk.ADN.Viewing.Extension.TransformTool.js"></script> -->
+	 <!-- <script src="Autodesk.ADN.Viewing.Extension.ContextMenu.js"></script> -->
+	 <!-- <script src="Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script>	 -->
 
-	 <!-- <script type="text/javascript" src="scripts/aaa.js"></script> -->
+<!-- 	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
+	 <script type="text/javascript" src="scripts/testData.js"></script> -->
 
-	 <style type="text/css">
-
-	 </style>
-
-	 <script>
-
-	 	// var testdata_ = [
-		 // 	{"type":"room", "superId":1, "selfId": 1, "pos_index": 1, "infoId":1},
-		 // 	{"type":"room", "pos_index":3, "infoId":3},
-		 // 	{"type":"room", "selfId": 3, "pos_index": 4, "infoId":5},
-		 // 	{"type":"tower", "selfId": 1, "infoId":7}
-	 	// ];
-	 	var testdata_ = [
-	 		{"type":"room", "selfId": 5, "pos_index": 1, "infoId":1},
-	 		{"type":"room", "selfId": 1, "pos_index": 2, "infoId":2},
-	 		{"type":"tower", "selfId": 14, "pos_index": 1, "infoId":3},
-	 	]
-	 	var myViewerDiv = document.getElementById('MyViewerDiv');
-	 	var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
-	 	var options = {
-	 		'env' : 'Local',
-	 		'document' : './svf/building.max/building.svf'
-	 	}; 	
-
-	 	// aaaa();
-	 	Autodesk.Viewing.Initializer(options, function() {
-	 		viewer.initialize ();	
-	 		viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {     
-	 			viewer.fitToView (false) ;	 		               
-	 			viewer.loadExtension('Autodesk.ADN.Viewing.Extension.ContextMenu');
-	 			deleteToolbar();
-	 			// viewer.setViewCube("[],[top],[]");
-	 		}) ;	
-	 	});	
- 	
-	</script>
-
-	 <script type="text/javascript" src="scripts/tempData.js"></script>	 
-	 <script type="text/javascript" src="scripts/testData.js"></script>
 	 <script type="text/javascript" src="scripts/modelLoader.js"></script>
-	 <script type="text/javascript" src="scripts/toolbarControler.js"></script>	 
+	 <script type="text/javascript" src="scripts/toolbarControler.js"></script>	 	
 	 <script type="text/javascript" src="scripts/level1.js"></script>	 
-	
 	
 </body>
 </html>

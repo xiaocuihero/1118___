@@ -6,8 +6,8 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
 include('dbConfig.php'); 
 
-// $siteId = 1;
-$siteId = $_POST["siteId"];
+$siteId = 1;
+// $siteId = $_POST["siteId"];
 
 $siteRs = [];
 $siteSql = "SELECT 'site' AS type, t.*,l.* FROM CWRSD_SITE_CUSTOMERSITE_T t INNER JOIN CWRSD_LOGIC_INFORMATION_T l ON t.INNER_CODE=l.SITE_INNER_CODE WHERE t.INNER_CODE=".$siteId;

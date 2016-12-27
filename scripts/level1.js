@@ -1,6 +1,25 @@
+var myViewerDiv = document.getElementById('MyViewerDiv');
+var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
+var options = {
+	'env' : 'Local',
+	'document' : './svf/building.max/building.svf'
+}; 	
+
+// aaaa();
+Autodesk.Viewing.Initializer(options, function() {
+	viewer.initialize ();	
+	viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {     
+		viewer.fitToView (false) ;	 		               
+		viewer.loadExtension('Autodesk.ADN.Viewing.Extension.ContextMenu');
+		deleteToolbar();
+		// viewer.setViewCube("[],[top],[]");
+	}) ;	
+});	
+
 var models = [];
 var infos = [];
 var siteId = 1;
+var siteData = {};
 CZLoadFloor();
 $.ajax({
 	url:"./php/selectInfoLevelOne.php",
@@ -13,6 +32,7 @@ $.ajax({
 		var towers = [];
 		var derricks=[];
 		var antennas = [];
+		var oilEngines = [];
 		for(var i in datas){
 			if(datas[i].type == "room"){
 				rooms.push(datas[i]);
@@ -22,6 +42,10 @@ $.ajax({
 				derricks.push(datas[i]);
 			}else if(datas[i].type == "antenna"){
 				antennas.push(datas[i]);
+			}else if(datas[i].type == "site"){
+				siteData = datas[i];
+			}else if(datas[i].type == "oilEngine"){
+				oilEngines.push(datas[i]);
 			}
 		}
 		render(rooms, towers, derricks, antennas);
@@ -40,7 +64,7 @@ function render(rooms, towers, derricks, antennas){
 	}
 	//Tower
 	for(var i in towers){
-		var dataT = towers[i];
+		var dataT = towers[i];		
 		CZLoad(dataT, function(modelt, datat){
 			infos.push(datat);
 			// models.push(modelt);

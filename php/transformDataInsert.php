@@ -56,7 +56,7 @@ for($i = 0; $i < count($tdata); $i++){
 	}
 }
 
-$result=mysqli_query($con,$sql);
+// $result=mysqli_query($con,$sql);
 
 echo json_encode($sql);
 

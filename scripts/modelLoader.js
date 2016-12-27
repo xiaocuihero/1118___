@@ -53,33 +53,6 @@ function CZLoad(para, callback){
 	});
 }
 
-// 3629,3620,3621,3622,3623
-
-
-// function CZLoadBasicModel(para, callback){
-// 	$.ajax({
-// 		url:"./php/select.php",
-// 		type:"POST",
-// 		data: para,
-// 		dataType:"JSON",
-// 		success:function(data){
-// 			if (data.length > 0){
-// 				//para life-circle? FIXIT...
-// 				var dataTemp = data[0];
-// 				dataTemp.infoId = para.infoId;
-// 				CZLoadModelWith(dataTemp, function(model, data1){
-// 					callback(model, data1);
-// 				});
-// 			}else{
-// 				console.log("CZLoadBasicModel error 1");
-// 			}
-// 		},
-// 		error:function(e){
-// 			console.log(e);
-// 		}
-// 	});
-// }
-
 function CZloadModel(urn, transform){
 	viewer.loadModel(urn, { globalOffset : globalOffset, placementTransform: transformFormatMatrix(transform)},function(){
 		loadedModel = viewer.model;
@@ -92,9 +65,20 @@ function CZloadReferenceModel(urn){
 
 function CZLoadModelWith(data, callback){
 	var dataTemp = data;
-	console.log(data);
+	// console.log(data);
 	if (dataTemp.para.Uheight) {
 		dataTemp.tz = dataTemp.tz - (parseInt(dataTemp.para.Uheight) - 1) * 0.1458333;
+	}
+	if (dataTemp.para.type == "derrick"){
+		// console.log("dataTemp.para.POLE_HEIGHT" + dataTemp.para.POLE_HEIGHT);
+		// console.log("dataTemp.stander_height" + dataTemp.stander_height);
+		if(dataTemp.para.POLE_HEIGHT){
+			// console.log("dataTemp.para.POLE_HEIGHT exist!");
+			dataTemp.tz = parseFloat(dataTemp.para.POLE_HEIGHT) * 3.28;
+		}else{
+			// console.log("dataTemp.para.POLE_HEIGHT not exist!");
+			dataTemp.tz = dataTemp.stander_height || 0;			
+		}
 	}
 	var transM4 = transformFormatMatrix(dataTemp);
 	if(data.superTrans) {
@@ -114,7 +98,7 @@ function CZLoadModelWith(data, callback){
 	if(dataTemp.urn_other !== null || dataTemp.urn_other!== undefined || dataTemp.urn_other!==''){		
 		urn = dataTemp.urn_other;
 	}
-	console.log(urn);
+	// console.log(urn);
 	viewer.loadModel(urn, { globalOffset : globalOffset, placementTransform: transM4, data1 : dataTemp}, function(){
 		var dataStore = viewer.model.myData.loadOptions.data1;
 		dataStore.mid = viewer.model.id;
