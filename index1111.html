@@ -301,24 +301,19 @@
 			// console.log(tttDatas);
 			// InsertTransform("derrick", tttDatas);
 			// InsertTransform("antenna", AntennaData);
-	 		console.log(1);
+	 		// console.log(1);
 			var tttDatas = [];
-			for(var i = 0; i < 15; i++){
-				// for(var j = 0; j < 4; j++){
-				// 	var data = {};
-				// 	data = $.extend(data, roomTrans_2[j]);
-				// 	// data = roomTrans_2[j];
-				// 	data.selfId = i + 1;
-				// 	tttDatas.push(data);
-				// }
-				var data = {};
-				data = $.extend(data, towerTrans_2[0]);
-				data.selfId = i + 1;
-				tttDatas.push(data);
+			for(var i = 0; i < 27; i++){
+				for(var j in cabinetTrans0){
+					var data = {};
+					data = $.extend(data, cabinetTrans0[j]);
+					data.selfId = i + 1;
+					tttDatas.push(data);
+				}
 			}
 			// console.log(tttDatas);	
-
-			InsertTransform("tower", tttDatas);
+			InsertTransform("cabinet", tttDatas);
+			// InsertTransform("tower", tttDatas);
 			// InsertTransform("room", tttDatas);
 			function dataBySuper(index, datas){
 				var arr = [];

@@ -6,12 +6,17 @@ var options = {
 }; 	
 
 // aaaa();
+
 Autodesk.Viewing.Initializer(options, function() {
 	viewer.initialize ();	
 	viewer.addEventListener (Autodesk.Viewing.GEOMETRY_LOADED_EVENT, function (event) {     
 		viewer.fitToView (false) ;	 		               
 		viewer.loadExtension('Autodesk.ADN.Viewing.Extension.ContextMenu');
 		deleteToolbar();
+		// if(event.model.id == roomModelId){
+		// 	console.log(1111);
+		// 	viewer.fitToView(roomFragments);
+		// }
 		// viewer.setViewCube("[],[top],[]");
 	}) ;	
 });	
@@ -20,6 +25,7 @@ var models = [];
 var infos = [];
 var siteId = 1;
 var siteData = {};
+
 CZLoadFloor();
 $.ajax({
 	url:"./php/selectInfoLevelOne.php",
@@ -58,7 +64,7 @@ function render(rooms, towers, derricks, antennas){
 		var data = rooms[i];
 		data.pos_index = parseInt(i) + 1;
 		CZLoad(data, function(modelr, datar){
-			infos.push(datar);	 				
+			infos.push(datar);
 			// models.push(modelr);
 		});
 	}
@@ -83,7 +89,7 @@ function render(rooms, towers, derricks, antennas){
 							var dataA = antennas[k];
 							if(datad.para.infoId == dataA.superInfoId){
 								dataA.superTrans = datad.dataTransM4;
-								console.log(dataA);
+								// console.log(dataA);
 								CZLoad(dataA, function(modela, dataa){
 									infos.push(dataa);
 									// models.push(modela);

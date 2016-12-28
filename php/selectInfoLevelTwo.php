@@ -6,8 +6,8 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
 include('dbConfig.php'); 
 
-$roomId = 1;
-// $roomId = $_POST["roomId"];
+// $roomId = 1;
+$roomId = $_POST["roomId"];
 
 $rs = [];
 
@@ -34,6 +34,7 @@ while ($row = oci_fetch_assoc($reckCom)) {
 	$row["infoId"] = $row["INNER_CODE"];
 	$row["selfId"] = $row["MODEL_ID"];
 	$row["pos_index"] = $row["SPATIAL_LOCATION"];
+	$row["superId"] = $roomRS[0]["MODEL_ID"];
 	array_push($reckRs, $row);
 	array_push($reckIds, $row["INNER_CODE"]);
 }

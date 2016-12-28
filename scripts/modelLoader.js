@@ -94,10 +94,7 @@ function CZLoadModelWith(data, callback){
 	}
 	dataTemp.dataTransM4 = transM4.elements;
 
-	var urn = dataTemp.urn;
-	if(dataTemp.urn_other !== null || dataTemp.urn_other!== undefined || dataTemp.urn_other!==''){		
-		urn = dataTemp.urn_other;
-	}
+	var urn = dataTemp.urn_other || dataTemp.urn;
 	// console.log(urn);
 	viewer.loadModel(urn, { globalOffset : globalOffset, placementTransform: transM4, data1 : dataTemp}, function(){
 		var dataStore = viewer.model.myData.loadOptions.data1;
