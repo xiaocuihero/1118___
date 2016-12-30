@@ -30,7 +30,7 @@ Autodesk.Viewing.Initializer(options, function() {
 
 var models = [];
 var infos = [];
-var roomId = 3;
+var roomId = 1;
 
 $.ajax({
 	url:"./php/selectInfoLevelTwo.php",

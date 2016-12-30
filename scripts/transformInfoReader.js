@@ -19,7 +19,7 @@ function adjustDataInit(adjust, other){
 function adjustInit(){
 	if (otherUrl != null){
 		viewer.loadModel(otherUrl, {globalOffset : globalOffset},function(){
-			otherModel = viewer.model;			
+			otherModel = viewer.model;
 		});
 	}
 	var placementTransform = new THREE.Matrix4();
